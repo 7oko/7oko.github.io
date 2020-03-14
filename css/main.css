@@ -264,6 +264,7 @@ kbd {
   border: 1px solid #ccc;
   border-radius: 0.2em;
   box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.1);
+  color: #555;
   font-family: inherit;
   padding: 0.1em 0.3em;
   white-space: nowrap;
@@ -1137,6 +1138,12 @@ pre .javascript .function {
   padding: 2px;
   border-radius: 50%;
 }
+.site-author-image {
+  transition: transform 1s ease-out;
+}
+.site-author-image:hover {
+  transform: rotateZ(360deg);
+}
 .site-author-name {
   color: var(--text-color);
   font-weight: 600;
@@ -1163,7 +1170,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1b9d69;
+  background: #ff1a40;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1494,7 +1501,7 @@ pre .javascript .function {
     font-size: 1.125em;
   }
 }
-.post-body span.exturl .fa {
+.post-body .exturl .fa {
   font-size: 0.875em;
   margin-left: 4px;
 }
@@ -1530,7 +1537,8 @@ pre .javascript .function {
   opacity: 0;
 }
 .posts-collapse {
-  margin-left: 55px;
+  margin-left: 35px;
+  margin-top: 35px;
   position: relative;
 }
 @media (max-width: 767px) {
