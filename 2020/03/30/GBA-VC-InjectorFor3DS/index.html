@@ -20,19 +20,28 @@
     var CONFIG = {"hostname":"7oko.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="莫道君行早，更有早行人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tags">
-<meta property="og:url" content="http://7oko.com/tags/index.html">
+  <meta name="description" content="前情提要为什么要水这么一篇文章 在把switch借给朋友玩的这段时间，我把目光投向了吃灰已久的3ds…. 我想要在实机上游玩gba游戏，但是3ds上的模拟器又有各种各样的兼容性问题，达不到eshop里VC金银流畅的游玩体验；宣称能游玩GBA的DSTWO PLUS烧录卡早已停产，某宝&#x2F;闲鱼的价格居高不下…经过一番摸索，我找到了可能是现今最好的解决方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GBA文件转CIA文件，在3ds上游玩GBA游戏的解决方案">
+<meta property="og:url" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/index.html">
 <meta property="og:site_name" content="Toko&#39;s Blog">
-<meta property="og:description" content="莫道君行早，更有早行人">
+<meta property="og:description" content="前情提要为什么要水这么一篇文章 在把switch借给朋友玩的这段时间，我把目光投向了吃灰已久的3ds…. 我想要在实机上游玩gba游戏，但是3ds上的模拟器又有各种各样的兼容性问题，达不到eshop里VC金银流畅的游玩体验；宣称能游玩GBA的DSTWO PLUS烧录卡早已停产，某宝&#x2F;闲鱼的价格居高不下…经过一番摸索，我找到了可能是现今最好的解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-11T11:25:09.000Z">
-<meta property="article:modified_time" content="2020-03-11T12:54:17.868Z">
+<meta property="og:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia1.png">
+<meta property="og:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia2.png">
+<meta property="og:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia3.png">
+<meta property="og:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia4.png">
+<meta property="og:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia5.png">
+<meta property="og:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia6.png">
+<meta property="article:published_time" content="2020-03-30T05:21:13.000Z">
+<meta property="article:modified_time" content="2020-03-30T09:07:14.170Z">
 <meta property="article:author" content="Toko">
+<meta property="article:tag" content="3ds">
+<meta property="article:tag" content="GBA">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/gba2cia1.png">
 
-<link rel="canonical" href="http://7oko.com/tags/">
+<link rel="canonical" href="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/">
 
 
 <script id="page-configurations">
@@ -40,12 +49,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>Tags | Toko's Blog
-  </title>
+  <title>GBA文件转CIA文件，在3ds上游玩GBA游戏的解决方案 | Toko's Blog</title>
   
 
 
@@ -188,57 +196,164 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://7oko.com/2020/03/30/GBA-VC-InjectorFor3DS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Toko">
+      <meta itemprop="description" content="莫道君行早，更有早行人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Toko's Blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GBA文件转CIA文件，在3ds上游玩GBA游戏的解决方案
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">Tags
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2020-03-30 13:21:13 / 修改时间：17:07:14" itemprop="dateCreated datePublished" datetime="2020-03-30T13:21:13+08:00">2020-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Play/" itemprop="url" rel="index"><span itemprop="name">Play</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Play/3ds/" itemprop="url" rel="index"><span itemprop="name">3ds</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/30/GBA-VC-InjectorFor3DS/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/30/GBA-VC-InjectorFor3DS/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
   
 
-</div>
+        </div>
+      </header>
 
-</header>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/3ds/" style="font-size: 12px; color: #ccc">3ds</a> <a href="/tags/GBA/" style="font-size: 12px; color: #ccc">GBA</a> <a href="/tags/Markdown/" style="font-size: 12px; color: #ccc">Markdown</a> <a href="/tags/PolitiScales/" style="font-size: 12px; color: #ccc">PolitiScales</a>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
+        <h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p><del>为什么要水这么一篇文章</del></p>
+<p>在把switch借给朋友玩的这段时间，我把目光投向了吃灰已久的3ds….</p>
+<p>我想要在实机上游玩gba游戏，但是3ds上的模拟器又有各种各样的兼容性问题，达不到eshop里VC金银流畅的游玩体验；宣称能游玩GBA的DSTWO PLUS烧录卡早已停产，某宝/闲鱼的价格居高不下…经过一番摸索，我找到了<strong>可能</strong>是现今最好的解决方案。</p>
+<a id="more"></a>
+
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li><p>一台BOOT9STARP(B9S)破解的3ds</p>
+<p>参考<a href="https://3ds.hacks.guide/" target="_blank" rel="noopener">3ds破解手册</a>或者<a href="https://stray-soul.site/index.php/3dshack-getstarted" target="_blank" rel="noopener">一只火狐大佬整理的教程</a>(推荐)</p>
+<p>嫌麻烦的同学可以<del>交给热心摊主处理</del>  </p>
+</li>
+<li><p><a href="https://gbatemp.net/threads/release-ultimate-gba-vc-injector-for-3ds.438057/" target="_blank" rel="noopener">Ultimate GBA VC Injector for 3DS</a></p>
+<p>汉化版<a href="https://1drv.ms/u/s!AuzARhFyMrG9lD29u9s_vl-PE0CN?e=pyFypW" target="_blank" rel="noopener">下载链接</a></p>
+</li>
+<li><p>你想要在3ds上运行的GBA游戏ROM文件</p>
+<p>这里以<strong>漆黑的魅影</strong>为例（很棒的GBA宝可梦改版，我一直想在实机上玩）</p>
+</li>
+</ul>
+<h1 id="GBA-转CIA"><a href="#GBA-转CIA" class="headerlink" title="GBA 转CIA"></a>GBA 转CIA</h1><ol>
+<li><p>打开软件并导入下载好的<code>.gba</code>文件，ROM大小和存档类型会自动确认(汉化版ROM往往是<em>数据库未找到该游戏</em>，请确保选择的<strong>正确无误</strong>以免影响存档)</p>
+<p><img src="gba2cia1.png" alt="gba2cia1"></p>
+<p><img src="gba2cia2.png" alt="gba2cia2"></p>
+</li>
+<li><p>填写要转换的VC图标和名称(因为3ds字库的原因建议不要使用中文XD)，设置3D横幅(就是选中这个游戏时3ds上屏的画面)</p>
+<p><img src="gba2cia3.png" alt="gba2cia3"></p>
+<p><img src="gba2cia4.png" alt="gba2cia4"></p>
+</li>
+<li><p>设置VC参数并导出CIA文件(注意当转换多个<code>.cia</code>文件时，确保每个文件的<em>产品代码</em>及<em>项目ID</em>都不一样)</p>
+<p><img src="gba2cia5.png" alt="gba2cia5"></p>
+</li>
+<li><p>在3ds上安装转换好的<code>.cia</code>文件</p>
+<p>关于如何B9S<a href="https://stray-soul.site/index.php/install-cia" target="_blank" rel="noopener"><strong>如何安装cia文件</strong></a>这里不再赘述(实在懒得截图了)</p>
+<p><img src="gba2cia6.png" alt="gba2cia6"></p>
+<p>大功告成~</p>
+</li>
+</ol>
+<h1 id="备注事项"><a href="#备注事项" class="headerlink" title="备注事项"></a>备注事项</h1><ul>
+<li>据说部分老款3ds对这种方式转换的<code>.cia</code>支持不好，会出现黑屏情况(我的美版老小三反正测试是没问题啦)</li>
+<li>港版不支持港版不支持港版不支持</li>
+<li><strong>存档类型</strong>一定要设置正确</li>
+</ul>
+
     </div>
-    
 
     
     
     
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/3ds/" rel="tag"># 3ds</a>
+              <a href="/tags/GBA/" rel="tag"># GBA</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/28/MyPoliticalTest/" rel="prev" title="我的政治维度（PolitiScales测试结果）">
+      <i class="fa fa-chevron-left"></i> 我的政治维度（PolitiScales测试结果）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -285,6 +400,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前情提要"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBA-转CIA"><span class="nav-number">3.</span> <span class="nav-text">GBA 转CIA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备注事项"><span class="nav-number">4.</span> <span class="nav-text">备注事项</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

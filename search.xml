@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>GBA文件转CIA文件，在3ds上游玩GBA游戏的解决方案</title>
+    <url>/2020/03/30/GBA-VC-InjectorFor3DS/</url>
+    <content><![CDATA[<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p><del>为什么要水这么一篇文章</del></p>
+<p>在把switch借给朋友玩的这段时间，我把目光投向了吃灰已久的3ds….</p>
+<p>我想要在实机上游玩gba游戏，但是3ds上的模拟器又有各种各样的兼容性问题，达不到eshop里VC金银流畅的游玩体验；宣称能游玩GBA的DSTWO PLUS烧录卡早已停产，某宝/闲鱼的价格居高不下…经过一番摸索，我找到了<strong>可能</strong>是现今最好的解决方案。</p>
+<a id="more"></a>
+
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li><p>一台BOOT9STARP(B9S)破解的3ds</p>
+<p>参考<a href="https://3ds.hacks.guide/" target="_blank" rel="noopener">3ds破解手册</a>或者<a href="https://stray-soul.site/index.php/3dshack-getstarted" target="_blank" rel="noopener">一只火狐大佬整理的教程</a>(推荐)</p>
+<p>嫌麻烦的同学可以<del>交给热心摊主处理</del>  </p>
+</li>
+<li><p><a href="https://gbatemp.net/threads/release-ultimate-gba-vc-injector-for-3ds.438057/" target="_blank" rel="noopener">Ultimate GBA VC Injector for 3DS</a></p>
+<p>汉化版<a href="https://1drv.ms/u/s!AuzARhFyMrG9lD29u9s_vl-PE0CN?e=pyFypW" target="_blank" rel="noopener">下载链接</a></p>
+</li>
+<li><p>你想要在3ds上运行的GBA游戏ROM文件</p>
+<p>这里以<strong>漆黑的魅影</strong>为例（很棒的GBA宝可梦改版，我一直想在实机上玩）</p>
+</li>
+</ul>
+<h1 id="GBA-转CIA"><a href="#GBA-转CIA" class="headerlink" title="GBA 转CIA"></a>GBA 转CIA</h1><ol>
+<li><p>打开软件并导入下载好的<code>.gba</code>文件，ROM大小和存档类型会自动确认(汉化版ROM往往是<em>数据库未找到该游戏</em>，请确保选择的<strong>正确无误</strong>以免影响存档)</p>
+<p><img src="gba2cia1.png" alt="gba2cia1"></p>
+<p><img src="gba2cia2.png" alt="gba2cia2"></p>
+</li>
+<li><p>填写要转换的VC图标和名称(因为3ds字库的原因建议不要使用中文XD)，设置3D横幅(就是选中这个游戏时3ds上屏的画面)</p>
+<p><img src="gba2cia3.png" alt="gba2cia3"></p>
+<p><img src="gba2cia4.png" alt="gba2cia4"></p>
+</li>
+<li><p>设置VC参数并导出CIA文件(注意当转换多个<code>.cia</code>文件时，确保每个文件的<em>产品代码</em>及<em>项目ID</em>都不一样)</p>
+<p><img src="gba2cia5.png" alt="gba2cia5"></p>
+</li>
+<li><p>在3ds上安装转换好的<code>.cia</code>文件</p>
+<p>关于如何B9S<a href="https://stray-soul.site/index.php/install-cia" target="_blank" rel="noopener"><strong>如何安装cia文件</strong></a>这里不再赘述(实在懒得截图了)</p>
+<p><img src="gba2cia6.png" alt="gba2cia6"></p>
+<p>大功告成~</p>
+</li>
+</ol>
+<h1 id="备注事项"><a href="#备注事项" class="headerlink" title="备注事项"></a>备注事项</h1><ul>
+<li>据说部分老款3ds对这种方式转换的<code>.cia</code>支持不好，会出现黑屏情况(我的美版老小三反正测试是没问题啦)</li>
+<li>港版不支持港版不支持港版不支持</li>
+<li><strong>存档类型</strong>一定要设置正确</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Play</category>
+        <category>3ds</category>
+      </categories>
+      <tags>
+        <tag>3ds</tag>
+        <tag>GBA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的政治维度（PolitiScales测试结果）</title>
     <url>/2020/03/28/MyPoliticalTest/</url>
     <content><![CDATA[<h1 id="什么是PolitiScales测试"><a href="#什么是PolitiScales测试" class="headerlink" title="什么是PolitiScales测试"></a>什么是PolitiScales测试</h1><blockquote>
