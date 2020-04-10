@@ -1,6 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>寻找两个有序数组的中位数</title>
+    <url>/2020/04/10/MedianOfTwoSortedArrays/</url>
+    <content><![CDATA[<p>​    最近刚开始刷Leetcode，第一道<code>Hard</code>题就难倒了我。题解里有位大神的算法很巧妙，我很容易就理解了，在此做个记录。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>题目链接：<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/median-of-two-sorted-arrays/</a></p>
+<p>题解链接：<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-shu/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-shu/</a> </p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><blockquote>
+<p>给定两个大小为 m 和 n 的有序数组 <code>nums1</code> 和 <code>nums2</code>。</p>
+<p>请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 <code>O(log(m + n))</code>。</p>
+<p>你可以假设 <code>nums1</code> 和 <code>nums2</code> 不会同时为空。</p>
+<p>示例 1:</p>
+<blockquote>
+<p>nums1 = [1, 3]<br>nums2 = [2]</p>
+</blockquote>
+<p>则中位数是 <code>2.0</code><br>示例 2:</p>
+<blockquote>
+<p>nums1 = [1, 2]<br>nums2 = [3, 4]</p>
+</blockquote>
+<p>则中位数是 <code>(2 + 3)/2 = 2.5</code></p>
+</blockquote>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="首先要理解中位数"><a href="#首先要理解中位数" class="headerlink" title="首先要理解中位数"></a>首先要理解中位数</h3><blockquote>
+<p>中位数（Median）又称中值，统计学中的专有名词，是按顺序排列的一组数据中居于中间位置的数，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分。对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。如果观察值有偶数个，通常取最中间的两个数值的平均数作为中位数。</p>
+</blockquote>
+<blockquote>
+<p><code>[2 3 5]</code> 中位数是<code>3</code></p>
+<p><code>[1 4 7 9]</code> 中位数是<code>(4+7)/2=5.5</code></p>
+</blockquote>
+<h3 id="割-Cut-的概念"><a href="#割-Cut-的概念" class="headerlink" title="割(Cut)的概念"></a>割(Cut)的概念</h3><ul>
+<li><p>通过切一刀，可以把有序数组分成左右两个部分，切的那一刀就被称为割(Cut)。</p>
+</li>
+<li><p>割(Cut)的左右会有两个元素，分别是左边最大值和右边最小值。</p>
+</li>
+<li><p>定义<code>LMax= Max(LeftPart)</code> <code>RMin = Min(RightPart)</code>  //<strong>由小到大的有序数组</strong></p>
+</li>
+<li><p><strong>割可以割在2个数中间，也可以割在1个数上，如果割在一个数上，那么这个数既属于左边，也属于右边</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>奇数组:<code>[2 3 5]</code> 对应的中位数为<code>3</code>，假定割(Cut)在3上，我们可以把3分为2个： <code>[2（3/3） 5]</code></p>
+<p>因此<code>LMax=3</code>, <code>RMin=3</code></p>
+<p>偶数组: <code>[1 4 7 9]</code> 对应的中位数为 <code>(4 + 7) /2 = 5.5</code>,假定割(Cut)在4和7之间： <code>[1 （4/7）9]</code></p>
+<p>因此<code>LMax=4</code>,<code>RMin=7</code></p>
+</blockquote>
+<h3 id="割和第k个元素"><a href="#割和第k个元素" class="headerlink" title="割和第k个元素"></a>割和第<code>k</code>个元素</h3><h4 id="一个数组"><a href="#一个数组" class="headerlink" title="一个数组"></a>一个数组</h4><p>对于有序数组A，如果在k的位置割一下，容易得出<code>LMax = RMin = A[k]</code></p>
+<h4 id="两个数组"><a href="#两个数组" class="headerlink" title="两个数组"></a>两个数组</h4><p>将两个数组合成一个有序数组时，第k位的元素</p>
+<blockquote>
+<p>我们设:<br><code>Ci</code>为第<code>i</code>个数组的割</p>
+<p><code>LMaxi</code>为第<code>i</code>个数组割后的左元素i</p>
+<p><code>RMini</code>为第<code>i</code>个数组割后的右元素</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Leftpart</th>
+<th align="center">Ci</th>
+<th align="center">Rightpart</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a<sub>1</sub>,a<sub>2</sub>,…,a<sub>i</sub></td>
+<td align="center">/</td>
+<td align="center">a<sub>i+1</sub>,a<sub>i+2</sub>,…,a<sub>m</sub></td>
+</tr>
+<tr>
+<td align="center">b<sub>1</sub>,b<sub>2</sub>,…,b<sub>j</sub></td>
+<td align="center">/</td>
+<td align="center">b<sub>j+1</sub>,b<sub>j+2</sub>,…,b<sub>n</sub></td>
+</tr>
+</tbody></table>
+<p>首先，因为数组是有序的，所以<code>LMax1 &lt;= RMin1</code>，<code>LMax2 &lt;= RMin2</code> //割在某个数上时左右相等 </p>
+<p>其次，如果让<code>LMax1 &lt;= RMin2</code>，<code>LMax2 &lt;= RMin1</code> 呢？</p>
+<p>这表示左半边全部小于右半边。如果让左边的元素个数相加刚好为<code>k</code>，那第<code>k</code>个元素就是<code>max(LMax1, Lmax2)</code>，也就是合并后有序数组左边<code>k</code>个元素的最大值。</p>
+<p>那么如果<code>LMax1 &gt; RMin2</code>，说明数组1的左边元素太多，我们把<code>C1</code>减小，<code>C2 = k - C1</code>相应地增大。<code>LMax2 &gt; RMin1</code>同理，把<code>C2</code>减小，<code>C1 = k - C2</code>也就相应地增大。</p>
+<h5 id="举例（设k-3）"><a href="#举例（设k-3）" class="headerlink" title="举例（设k = 3）"></a>举例（设k = 3）</h5><blockquote>
+<p>[2 3 5]<br>[1 4 7 9]</p>
+</blockquote>
+<p>设<code>C1 = 1</code>，则 <code>C2 = k - C1 = 2</code> 割后：</p>
+<blockquote>
+<p>[2 3 / 5]<br>[1 / 4 7 9]</p>
+</blockquote>
+<p>此时，<code>LMax1 = 3</code>, <code>RMin1 = 5</code>, <code>LMax2 = 1</code>, <code>RMin2 = 4</code>, </p>
+<p>满足 <code>LMax1 &lt; RMin2</code> 且 <code>LMax2 &lt; RMin1</code>，</p>
+<p>所以第<code>3</code>个元素为<code>max(LMax1, LMax2) = 3</code></p>
+<h3 id="两个数组合并后的长度问题-（本篇题解巧妙所在）"><a href="#两个数组合并后的长度问题-（本篇题解巧妙所在）" class="headerlink" title="两个数组合并后的长度问题 （本篇题解巧妙所在）"></a><strong>两个数组合并后的长度问题</strong> （本篇题解巧妙所在）</h3><blockquote>
+<p>两个数组的最大问题是，它们合并后，m+n总数可能为奇, 也可能为偶，所以我们得想法让m+n总是为偶数</p>
+<p>通过虚拟加入‘#’，我们让m转换成2m+1 ，n转换成2n+1, 两数之和就变成了2m+2n+2，恒为偶数。</p>
+<p>注意是虚拟加，其实根本没这一步，通过下面的转换，我们可以保证虚拟加后每个元素跟原来的元素一一对应</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">before</th>
+<th align="center">len</th>
+<th align="center">after</th>
+<th align="center">len</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[1 4 7 9]</td>
+<td align="center">4</td>
+<td align="center">[# 1 # 4 # 7 # 9]</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">[2 3 5]</td>
+<td align="center">3</td>
+<td align="center">[# 2 # 3 # 5 ]</td>
+<td align="center">7</td>
+</tr>
+</tbody></table>
+<p>这么虚拟加后，<strong>每个位置可以通过/2得到原来元素的位置</strong>：</p>
+<p>比如 2，原来在<code>0</code>位，现在是1位，<code>1/2=0</code></p>
+<p>比如 3，原来在<code>1</code>位，现在是3位，<code>3/2=1</code></p>
+<p>比如 5，原来在<code>2</code>位，现在是5位，<code>5/2=2</code></p>
+<p>比如 9，原来在<code>3</code>位，现在是7位，<code>7/2=3</code></p>
+<p>而对于割(<code>Cut</code>)，如果割在<code>‘#’</code>上等于割在2个元素之间，割在数字上等于把数字划到2个部分，总是有以下成立：</p>
+<blockquote>
+<p>LMaxi = (Ci-1)/2 位置上的元素<br>RMini = Ci/2 位置上的元素</p>
+</blockquote>
+<p> 例如：</p>
+<p>割在<code>3</code>上，<code>C = 3</code>，<code>LMax=a[(3-1)/2]=A[1]，RMin=a[3/2] =A[1]</code>，刚好都是3的位置！</p>
+<p>割在4/7之间‘#’，<code>C = 4</code>，<code>LMax=A[(4-1)/2]=A[1]=4 ，RMin=A[4/2]=A[2]=7</code></p>
+<p>剩下的事情就好办了，把2个数组看做一个虚拟的数组A，A有<code>2m+2n+2</code>个元素，割在<code>m+n+1</code>处，所以我们只需找到<code>m+n+1</code>位置的元素和<code>m+n+2</code>位置的元素就行了。</p>
+<p>左边：<code>A[m+n+1] = Max(LMax1,LMax2)</code></p>
+<p>右边：<code>A[m+n+2] = Min(RMin1,RMin2)</code></p>
+<p>==&gt;<code>Mid = (A[m+n+1]+A[m+n+2])/2 = (Max(LMax1,LMax2) + Min(RMin1,RMin2) )/2</code></p>
+<h3 id="最快的割-Cut-是使用二分法，有2个数组，我们对哪个做二分呢？"><a href="#最快的割-Cut-是使用二分法，有2个数组，我们对哪个做二分呢？" class="headerlink" title="最快的割(Cut)是使用二分法，有2个数组，我们对哪个做二分呢？"></a>最快的割(<code>Cut</code>)是使用二分法，有2个数组，我们对哪个做二分呢？</h3><p>根据之前的分析，我们知道了，只要C1或C2确定，另外一个也就确定了。这里，为了效率，我们肯定是选<code>长度较短</code>的做二分，假设为<code>C1</code>。</p>
+<p><code>LMax1&gt;RMin2</code>，把<code>C1</code>减小，<code>C2</code>增大。—&gt; <code>C1</code>向左二分</p>
+<p><code>LMax2&gt;RMin1</code>，把<code>C1</code>增大，<code>C2</code>减小。—&gt; <code>C1</code>向右二分</p>
+<h3 id="如果C1或C2已经到头了怎么办？"><a href="#如果C1或C2已经到头了怎么办？" class="headerlink" title="如果C1或C2已经到头了怎么办？"></a>如果<code>C1</code>或<code>C2</code>已经到头了怎么办？</h3><p>这种情况出现在：<code>如果有个数组完全小于或大于中值</code>。假定n&lt;m, 可能有4种情况：</p>
+<p><code>C1 = 0</code> —— 数组1整体都在右边了，所以都比中值大，中值在数组2中，简单的说就是数组1割后的左边是空了，所以我们可以假定<code>LMax1 = INT_MIN</code></p>
+<p><code>C1 =2n</code> —— 数组1整体都在左边了，所以都比中值小，中值在数组2中 ，简单的说就是数组1割后的右边是空了，所以我们可以假定<code>RMin1= INT_MAX</code>，来保证<code>LMax2 &lt; RMin1</code>恒成立</p>
+<p><code>C2 = 0</code>—— 数组2整体在右边了，所以都比中值大，中值在数组1中 ，简单的说就是数组2割后的左边是空了，所以我们可以假定<code>LMax2 = INT_MIN</code><br><code>C2 = 2m</code>—— 数组2整体在左边了，所以都比中值小，中值在数组1中, 简单的说就是数组2割后的右边是空了，为了让<code>LMax1 &lt; RMin2</code>恒成立，我们可以假定<code>RMin2 = INT_MAX</code></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max(a,b) (((a) &gt; (b)) ? (a) : (b))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> min(a,b) (((a) &lt; (b)) ? (a) : (b))</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = nums1.<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">int</span> m = nums2.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (n &gt; m)  <span class="comment">//保证数组1一定最短</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> findMedianSortedArrays(nums2, nums1);</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">// Ci 为第i个数组的割,比如C1为2时表示第1个数组只有2个元素。LMaxi为第i个数组割后的左元素。RMini为第i个数组割后的右元素。</span></span><br><span class="line">		<span class="keyword">int</span> LMax1, LMax2, RMin1, RMin2, c1, c2, lo = <span class="number">0</span>, hi = <span class="number">2</span> * n;  <span class="comment">//我们目前是虚拟加了'#'所以数组1是2*n长度</span></span><br><span class="line">	</span><br><span class="line">		<span class="keyword">while</span> (lo &lt;= hi)   <span class="comment">//二分</span></span><br><span class="line">		&#123;</span><br><span class="line">			c1 = (lo + hi) / <span class="number">2</span>;  <span class="comment">//c1是二分的结果</span></span><br><span class="line">			c2 = m + n - c1;</span><br><span class="line">	</span><br><span class="line">			LMax1 = (c1 == <span class="number">0</span>) ? INT_MIN : nums1[(c1 - <span class="number">1</span>) / <span class="number">2</span>];</span><br><span class="line">			RMin1 = (c1 == <span class="number">2</span> * n) ? INT_MAX : nums1[c1 / <span class="number">2</span>];</span><br><span class="line">			LMax2 = (c2 == <span class="number">0</span>) ? INT_MIN : nums2[(c2 - <span class="number">1</span>) / <span class="number">2</span>];</span><br><span class="line">			RMin2 = (c2 == <span class="number">2</span> * m) ? INT_MAX : nums2[c2 / <span class="number">2</span>];</span><br><span class="line">	</span><br><span class="line">			<span class="keyword">if</span> (LMax1 &gt; RMin2)</span><br><span class="line">				hi = c1 - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (LMax2 &gt; RMin1)</span><br><span class="line">				lo = c1 + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (<span class="built_in">max</span>(LMax1, LMax2) + <span class="built_in">min</span>(RMin1, RMin2)) / <span class="number">2.0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums1 = &#123; <span class="number">2</span>,<span class="number">3</span>, <span class="number">5</span> &#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums2 = &#123; <span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	</span><br><span class="line">	Solution solution;</span><br><span class="line">	<span class="keyword">double</span> ret = solution.findMedianSortedArrays(nums1, nums2);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Study</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我与炉石传说的故事</title>
     <url>/2020/04/07/MyHearthstoneLife/</url>
     <content><![CDATA[<p>​    随着凤凰年的临近，<strong>炉石传说</strong>这款游戏也迎来了她的第<strong>6</strong>个生日，也是我入坑的第<strong>4</strong>个年头了。除开宝可梦系列以外，这是陪我最久的游戏了。这款带给我无数回忆，让我结识了许多朋友的游戏，至今还有着不俗的热度。今年面临考研压力，我可能要<strong>退坑</strong>很长一段时间，谨以此文记录下我与炉石传说的故事。</p>

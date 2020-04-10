@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"7oko.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="​    最近刚开始刷Leetcode，第一道Hard题就难倒了我。题解里有位大神的算法很巧妙，我很容易就理解了，在此做个记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="寻找两个有序数组的中位数">
+<meta property="og:url" content="http://7oko.com/2020/04/10/MedianOfTwoSortedArrays/index.html">
+<meta property="og:site_name" content="Toko&#39;s Blog">
+<meta property="og:description" content="​    最近刚开始刷Leetcode，第一道Hard题就难倒了我。题解里有位大神的算法很巧妙，我很容易就理解了，在此做个记录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-10T11:42:17.000Z">
+<meta property="article:modified_time" content="2020-04-10T11:53:09.862Z">
+<meta property="article:author" content="Toko">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://7oko.com/2020/04/10/MedianOfTwoSortedArrays/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>寻找两个有序数组的中位数 | Toko's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Toko's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">人間万事塞翁が馬</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-list">
+
+    <a href="/list" rel="section"><i class="fa fa-fw fa-list"></i>清单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://7oko.com/2020/04/10/MedianOfTwoSortedArrays/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Toko">
+      <meta itemprop="description" content="莫道君行早，更有早行人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Toko's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          寻找两个有序数组的中位数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-10 19:42:17 / 修改时间：19:53:09" itemprop="dateCreated datePublished" datetime="2020-04-10T19:42:17+08:00">2020-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/10/MedianOfTwoSortedArrays/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/10/MedianOfTwoSortedArrays/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>​    最近刚开始刷Leetcode，第一道<code>Hard</code>题就难倒了我。题解里有位大神的算法很巧妙，我很容易就理解了，在此做个记录。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>题目链接：<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/median-of-two-sorted-arrays/</a></p>
+<p>题解链接：<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-shu/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-shu/</a> </p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><blockquote>
+<p>给定两个大小为 m 和 n 的有序数组 <code>nums1</code> 和 <code>nums2</code>。</p>
+<p>请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 <code>O(log(m + n))</code>。</p>
+<p>你可以假设 <code>nums1</code> 和 <code>nums2</code> 不会同时为空。</p>
+<p>示例 1:</p>
+<blockquote>
+<p>nums1 = [1, 3]<br>nums2 = [2]</p>
+</blockquote>
+<p>则中位数是 <code>2.0</code><br>示例 2:</p>
+<blockquote>
+<p>nums1 = [1, 2]<br>nums2 = [3, 4]</p>
+</blockquote>
+<p>则中位数是 <code>(2 + 3)/2 = 2.5</code></p>
+</blockquote>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="首先要理解中位数"><a href="#首先要理解中位数" class="headerlink" title="首先要理解中位数"></a>首先要理解中位数</h3><blockquote>
+<p>中位数（Median）又称中值，统计学中的专有名词，是按顺序排列的一组数据中居于中间位置的数，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分。对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。如果观察值有偶数个，通常取最中间的两个数值的平均数作为中位数。</p>
+</blockquote>
+<blockquote>
+<p><code>[2 3 5]</code> 中位数是<code>3</code></p>
+<p><code>[1 4 7 9]</code> 中位数是<code>(4+7)/2=5.5</code></p>
+</blockquote>
+<h3 id="割-Cut-的概念"><a href="#割-Cut-的概念" class="headerlink" title="割(Cut)的概念"></a>割(Cut)的概念</h3><ul>
+<li><p>通过切一刀，可以把有序数组分成左右两个部分，切的那一刀就被称为割(Cut)。</p>
+</li>
+<li><p>割(Cut)的左右会有两个元素，分别是左边最大值和右边最小值。</p>
+</li>
+<li><p>定义<code>LMax= Max(LeftPart)</code> <code>RMin = Min(RightPart)</code>  //<strong>由小到大的有序数组</strong></p>
+</li>
+<li><p><strong>割可以割在2个数中间，也可以割在1个数上，如果割在一个数上，那么这个数既属于左边，也属于右边</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>奇数组:<code>[2 3 5]</code> 对应的中位数为<code>3</code>，假定割(Cut)在3上，我们可以把3分为2个： <code>[2（3/3） 5]</code></p>
+<p>因此<code>LMax=3</code>, <code>RMin=3</code></p>
+<p>偶数组: <code>[1 4 7 9]</code> 对应的中位数为 <code>(4 + 7) /2 = 5.5</code>,假定割(Cut)在4和7之间： <code>[1 （4/7）9]</code></p>
+<p>因此<code>LMax=4</code>,<code>RMin=7</code></p>
+</blockquote>
+<h3 id="割和第k个元素"><a href="#割和第k个元素" class="headerlink" title="割和第k个元素"></a>割和第<code>k</code>个元素</h3><h4 id="一个数组"><a href="#一个数组" class="headerlink" title="一个数组"></a>一个数组</h4><p>对于有序数组A，如果在k的位置割一下，容易得出<code>LMax = RMin = A[k]</code></p>
+<h4 id="两个数组"><a href="#两个数组" class="headerlink" title="两个数组"></a>两个数组</h4><p>将两个数组合成一个有序数组时，第k位的元素</p>
+<blockquote>
+<p>我们设:<br><code>Ci</code>为第<code>i</code>个数组的割</p>
+<p><code>LMaxi</code>为第<code>i</code>个数组割后的左元素i</p>
+<p><code>RMini</code>为第<code>i</code>个数组割后的右元素</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Leftpart</th>
+<th align="center">Ci</th>
+<th align="center">Rightpart</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a<sub>1</sub>,a<sub>2</sub>,…,a<sub>i</sub></td>
+<td align="center">/</td>
+<td align="center">a<sub>i+1</sub>,a<sub>i+2</sub>,…,a<sub>m</sub></td>
+</tr>
+<tr>
+<td align="center">b<sub>1</sub>,b<sub>2</sub>,…,b<sub>j</sub></td>
+<td align="center">/</td>
+<td align="center">b<sub>j+1</sub>,b<sub>j+2</sub>,…,b<sub>n</sub></td>
+</tr>
+</tbody></table>
+<p>首先，因为数组是有序的，所以<code>LMax1 &lt;= RMin1</code>，<code>LMax2 &lt;= RMin2</code> //割在某个数上时左右相等 </p>
+<p>其次，如果让<code>LMax1 &lt;= RMin2</code>，<code>LMax2 &lt;= RMin1</code> 呢？</p>
+<p>这表示左半边全部小于右半边。如果让左边的元素个数相加刚好为<code>k</code>，那第<code>k</code>个元素就是<code>max(LMax1, Lmax2)</code>，也就是合并后有序数组左边<code>k</code>个元素的最大值。</p>
+<p>那么如果<code>LMax1 &gt; RMin2</code>，说明数组1的左边元素太多，我们把<code>C1</code>减小，<code>C2 = k - C1</code>相应地增大。<code>LMax2 &gt; RMin1</code>同理，把<code>C2</code>减小，<code>C1 = k - C2</code>也就相应地增大。</p>
+<h5 id="举例（设k-3）"><a href="#举例（设k-3）" class="headerlink" title="举例（设k = 3）"></a>举例（设k = 3）</h5><blockquote>
+<p>[2 3 5]<br>[1 4 7 9]</p>
+</blockquote>
+<p>设<code>C1 = 1</code>，则 <code>C2 = k - C1 = 2</code> 割后：</p>
+<blockquote>
+<p>[2 3 / 5]<br>[1 / 4 7 9]</p>
+</blockquote>
+<p>此时，<code>LMax1 = 3</code>, <code>RMin1 = 5</code>, <code>LMax2 = 1</code>, <code>RMin2 = 4</code>, </p>
+<p>满足 <code>LMax1 &lt; RMin2</code> 且 <code>LMax2 &lt; RMin1</code>，</p>
+<p>所以第<code>3</code>个元素为<code>max(LMax1, LMax2) = 3</code></p>
+<h3 id="两个数组合并后的长度问题-（本篇题解巧妙所在）"><a href="#两个数组合并后的长度问题-（本篇题解巧妙所在）" class="headerlink" title="两个数组合并后的长度问题 （本篇题解巧妙所在）"></a><strong>两个数组合并后的长度问题</strong> （本篇题解巧妙所在）</h3><blockquote>
+<p>两个数组的最大问题是，它们合并后，m+n总数可能为奇, 也可能为偶，所以我们得想法让m+n总是为偶数</p>
+<p>通过虚拟加入‘#’，我们让m转换成2m+1 ，n转换成2n+1, 两数之和就变成了2m+2n+2，恒为偶数。</p>
+<p>注意是虚拟加，其实根本没这一步，通过下面的转换，我们可以保证虚拟加后每个元素跟原来的元素一一对应</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">before</th>
+<th align="center">len</th>
+<th align="center">after</th>
+<th align="center">len</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[1 4 7 9]</td>
+<td align="center">4</td>
+<td align="center">[# 1 # 4 # 7 # 9]</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">[2 3 5]</td>
+<td align="center">3</td>
+<td align="center">[# 2 # 3 # 5 ]</td>
+<td align="center">7</td>
+</tr>
+</tbody></table>
+<p>这么虚拟加后，<strong>每个位置可以通过/2得到原来元素的位置</strong>：</p>
+<p>比如 2，原来在<code>0</code>位，现在是1位，<code>1/2=0</code></p>
+<p>比如 3，原来在<code>1</code>位，现在是3位，<code>3/2=1</code></p>
+<p>比如 5，原来在<code>2</code>位，现在是5位，<code>5/2=2</code></p>
+<p>比如 9，原来在<code>3</code>位，现在是7位，<code>7/2=3</code></p>
+<p>而对于割(<code>Cut</code>)，如果割在<code>‘#’</code>上等于割在2个元素之间，割在数字上等于把数字划到2个部分，总是有以下成立：</p>
+<blockquote>
+<p>LMaxi = (Ci-1)/2 位置上的元素<br>RMini = Ci/2 位置上的元素</p>
+</blockquote>
+<p> 例如：</p>
+<p>割在<code>3</code>上，<code>C = 3</code>，<code>LMax=a[(3-1)/2]=A[1]，RMin=a[3/2] =A[1]</code>，刚好都是3的位置！</p>
+<p>割在4/7之间‘#’，<code>C = 4</code>，<code>LMax=A[(4-1)/2]=A[1]=4 ，RMin=A[4/2]=A[2]=7</code></p>
+<p>剩下的事情就好办了，把2个数组看做一个虚拟的数组A，A有<code>2m+2n+2</code>个元素，割在<code>m+n+1</code>处，所以我们只需找到<code>m+n+1</code>位置的元素和<code>m+n+2</code>位置的元素就行了。</p>
+<p>左边：<code>A[m+n+1] = Max(LMax1,LMax2)</code></p>
+<p>右边：<code>A[m+n+2] = Min(RMin1,RMin2)</code></p>
+<p>==&gt;<code>Mid = (A[m+n+1]+A[m+n+2])/2 = (Max(LMax1,LMax2) + Min(RMin1,RMin2) )/2</code></p>
+<h3 id="最快的割-Cut-是使用二分法，有2个数组，我们对哪个做二分呢？"><a href="#最快的割-Cut-是使用二分法，有2个数组，我们对哪个做二分呢？" class="headerlink" title="最快的割(Cut)是使用二分法，有2个数组，我们对哪个做二分呢？"></a>最快的割(<code>Cut</code>)是使用二分法，有2个数组，我们对哪个做二分呢？</h3><p>根据之前的分析，我们知道了，只要C1或C2确定，另外一个也就确定了。这里，为了效率，我们肯定是选<code>长度较短</code>的做二分，假设为<code>C1</code>。</p>
+<p><code>LMax1&gt;RMin2</code>，把<code>C1</code>减小，<code>C2</code>增大。—&gt; <code>C1</code>向左二分</p>
+<p><code>LMax2&gt;RMin1</code>，把<code>C1</code>增大，<code>C2</code>减小。—&gt; <code>C1</code>向右二分</p>
+<h3 id="如果C1或C2已经到头了怎么办？"><a href="#如果C1或C2已经到头了怎么办？" class="headerlink" title="如果C1或C2已经到头了怎么办？"></a>如果<code>C1</code>或<code>C2</code>已经到头了怎么办？</h3><p>这种情况出现在：<code>如果有个数组完全小于或大于中值</code>。假定n&lt;m, 可能有4种情况：</p>
+<p><code>C1 = 0</code> —— 数组1整体都在右边了，所以都比中值大，中值在数组2中，简单的说就是数组1割后的左边是空了，所以我们可以假定<code>LMax1 = INT_MIN</code></p>
+<p><code>C1 =2n</code> —— 数组1整体都在左边了，所以都比中值小，中值在数组2中 ，简单的说就是数组1割后的右边是空了，所以我们可以假定<code>RMin1= INT_MAX</code>，来保证<code>LMax2 &lt; RMin1</code>恒成立</p>
+<p><code>C2 = 0</code>—— 数组2整体在右边了，所以都比中值大，中值在数组1中 ，简单的说就是数组2割后的左边是空了，所以我们可以假定<code>LMax2 = INT_MIN</code><br><code>C2 = 2m</code>—— 数组2整体在左边了，所以都比中值小，中值在数组1中, 简单的说就是数组2割后的右边是空了，为了让<code>LMax1 &lt; RMin2</code>恒成立，我们可以假定<code>RMin2 = INT_MAX</code></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max(a,b) (((a) &gt; (b)) ? (a) : (b))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> min(a,b) (((a) &lt; (b)) ? (a) : (b))</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = nums1.<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">int</span> m = nums2.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (n &gt; m)  <span class="comment">//保证数组1一定最短</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> findMedianSortedArrays(nums2, nums1);</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">// Ci 为第i个数组的割,比如C1为2时表示第1个数组只有2个元素。LMaxi为第i个数组割后的左元素。RMini为第i个数组割后的右元素。</span></span><br><span class="line">		<span class="keyword">int</span> LMax1, LMax2, RMin1, RMin2, c1, c2, lo = <span class="number">0</span>, hi = <span class="number">2</span> * n;  <span class="comment">//我们目前是虚拟加了'#'所以数组1是2*n长度</span></span><br><span class="line">	</span><br><span class="line">		<span class="keyword">while</span> (lo &lt;= hi)   <span class="comment">//二分</span></span><br><span class="line">		&#123;</span><br><span class="line">			c1 = (lo + hi) / <span class="number">2</span>;  <span class="comment">//c1是二分的结果</span></span><br><span class="line">			c2 = m + n - c1;</span><br><span class="line">	</span><br><span class="line">			LMax1 = (c1 == <span class="number">0</span>) ? INT_MIN : nums1[(c1 - <span class="number">1</span>) / <span class="number">2</span>];</span><br><span class="line">			RMin1 = (c1 == <span class="number">2</span> * n) ? INT_MAX : nums1[c1 / <span class="number">2</span>];</span><br><span class="line">			LMax2 = (c2 == <span class="number">0</span>) ? INT_MIN : nums2[(c2 - <span class="number">1</span>) / <span class="number">2</span>];</span><br><span class="line">			RMin2 = (c2 == <span class="number">2</span> * m) ? INT_MAX : nums2[c2 / <span class="number">2</span>];</span><br><span class="line">	</span><br><span class="line">			<span class="keyword">if</span> (LMax1 &gt; RMin2)</span><br><span class="line">				hi = c1 - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (LMax2 &gt; RMin1)</span><br><span class="line">				lo = c1 + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (<span class="built_in">max</span>(LMax1, LMax2) + <span class="built_in">min</span>(RMin1, RMin2)) / <span class="number">2.0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums1 = &#123; <span class="number">2</span>,<span class="number">3</span>, <span class="number">5</span> &#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums2 = &#123; <span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	</span><br><span class="line">	Solution solution;</span><br><span class="line">	<span class="keyword">double</span> ret = solution.findMedianSortedArrays(nums1, nums2);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/07/MyHearthstoneLife/" rel="prev" title="我与炉石传说的故事">
+      <i class="fa fa-chevron-left"></i> 我与炉石传说的故事
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先要理解中位数"><span class="nav-number">2.1.</span> <span class="nav-text">首先要理解中位数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#割-Cut-的概念"><span class="nav-number">2.2.</span> <span class="nav-text">割(Cut)的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#割和第k个元素"><span class="nav-number">2.3.</span> <span class="nav-text">割和第k个元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个数组"><span class="nav-number">2.3.1.</span> <span class="nav-text">一个数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个数组"><span class="nav-number">2.3.2.</span> <span class="nav-text">两个数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#举例（设k-3）"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">举例（设k &#x3D; 3）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个数组合并后的长度问题-（本篇题解巧妙所在）"><span class="nav-number">2.4.</span> <span class="nav-text">两个数组合并后的长度问题 （本篇题解巧妙所在）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最快的割-Cut-是使用二分法，有2个数组，我们对哪个做二分呢？"><span class="nav-number">2.5.</span> <span class="nav-text">最快的割(Cut)是使用二分法，有2个数组，我们对哪个做二分呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果C1或C2已经到头了怎么办？"><span class="nav-number">2.6.</span> <span class="nav-text">如果C1或C2已经到头了怎么办？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Toko"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Toko</p>
+  <div class="site-description" itemprop="description">莫道君行早，更有早行人</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/7oko" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;7oko" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact.toko@yahoo.com" title="E-Mail → mailto:contact.toko@yahoo.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/real7oko" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;real7oko" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://peing.net/zh-CN/7oko" title="Peing → https:&#x2F;&#x2F;peing.net&#x2F;zh-CN&#x2F;7oko" rel="noopener" target="_blank"><i class="fa fa-fw fa-question"></i>Peing</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/KurosawaOuse" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;KurosawaOuse" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/7oko" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;7oko" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Toko</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'Kuxsr7OulXxMnlyCzMo41em5-gzGzoHsz',
+      appKey     : 'fXlnRtYfKku3LpzCXq8J85yq',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
