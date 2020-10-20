@@ -20,17 +20,21 @@
     var CONFIG = {"hostname":"7oko.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="莫道君行早，更有早行人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Toko&#39;s Blog">
-<meta property="og:url" content="http://7oko.com/tags/Markdown/index.html">
+  <meta name="description" content="前几天在浏览 GeekPlux’s Wiki 时, 很羡慕博主在掌握那么多种知识的同时还能有条理地梳理出来, 于是开始动工搭建自己的知识化wiki.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于mkdocs搭建自己的wiki平台">
+<meta property="og:url" content="http://7oko.com/2020/10/19/MkdocsWiki/index.html">
 <meta property="og:site_name" content="Toko&#39;s Blog">
-<meta property="og:description" content="莫道君行早，更有早行人">
+<meta property="og:description" content="前几天在浏览 GeekPlux’s Wiki 时, 很羡慕博主在掌握那么多种知识的同时还能有条理地梳理出来, 于是开始动工搭建自己的知识化wiki.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-19T15:21:08.000Z">
+<meta property="article:modified_time" content="2020-10-20T06:00:58.550Z">
 <meta property="article:author" content="Toko">
+<meta property="article:tag" content="wiki">
+<meta property="article:tag" content="mkdocs">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://7oko.com/tags/Markdown/">
+<link rel="canonical" href="http://7oko.com/2020/10/19/MkdocsWiki/">
 
 
 <script id="page-configurations">
@@ -38,11 +42,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>标签: Markdown | Toko's Blog</title>
+  <title>基于mkdocs搭建自己的wiki平台 | Toko's Blog</title>
   
 
 
@@ -189,54 +193,171 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">Markdown
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://7oko.com/2020/10/19/MkdocsWiki/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Toko">
+      <meta itemprop="description" content="莫道君行早，更有早行人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Toko's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于mkdocs搭建自己的wiki平台
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-19 23:21:08" itemprop="dateCreated datePublished" datetime="2020-10-19T23:21:08+08:00">2020-10-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-20 14:00:58" itemprop="dateModified" datetime="2020-10-20T14:00:58+08:00">2020-10-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Work/" itemprop="url" rel="index"><span itemprop="name">Work</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Work/wiki/" itemprop="url" rel="index"><span itemprop="name">wiki</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/19/MkdocsWiki/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/19/MkdocsWiki/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+        <p>前几天在浏览 <a href="https://wiki.geekplux.com/" target="_blank" rel="noopener">GeekPlux’s Wiki</a> 时, 很羡慕博主在掌握那么多种知识的同时还能有条理地梳理出来, 于是开始动工搭建自己的知识化wiki.</p>
+<a id="more"></a>
+
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>GitHub 账号</li>
+<li>Python 2.6及以上</li>
+<li>Python package manager <a href="http://pip.readthedocs.org/en/latest/installing.html" target="_blank" rel="noopener">pip</a> </li>
+<li>独立域名(可选)</li>
+</ul>
+<h1 id="安装MkDocs"><a href="#安装MkDocs" class="headerlink" title="安装MkDocs"></a>安装MkDocs</h1><ul>
+<li><p>使用pip安装mkdocs <code>pip install mkdocs</code> </p>
+<p><strong>这里我选用的是material for MkDocs <code>pip install mkdocs-material</code></strong></p>
+</li>
+<li><p>运行<code>mkdocs help</code> 检查是否正确安装</p>
+</li>
+</ul>
+<h1 id="使用MkDocs"><a href="#使用MkDocs" class="headerlink" title="使用MkDocs"></a>使用MkDocs</h1><ul>
+<li><p>初始化新项目</p>
+<p> <code>mkdocs new mywiki</code></p>
+<p><code>cd mywiki</code></p>
+</li>
+<li><p>预览当前文档</p>
+<p><code>mkdocs serve</code></p>
+</li>
+<li><p>在浏览器中打开 http:<em>//127.0.0.1:8000/</em></p>
+<p>(预览文档的内建服务器支持在配置文件,文档目录或主题发生改变时自动载入并重新生成文档.)</p>
+</li>
+<li><p>配置MkDocs</p>
+<p> 修改<code>mkdocs.yml</code>文件,详细配置可以查看<a href="https://www.mkdocs.org/" target="_blank" rel="noopener">MkDocs官网</a>  <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs官网</a></p>
+</li>
+</ul>
+<h1 id="托管到Github"><a href="#托管到Github" class="headerlink" title="托管到Github"></a>托管到Github</h1><ul>
+<li>将<code>Mkdocs build</code> 后生成的<code>site</code>文件夹所有内容push到新建的repo</li>
+</ul>
+<h1 id="绑定独立域名"><a href="#绑定独立域名" class="headerlink" title="绑定独立域名"></a>绑定独立域名</h1><ul>
+<li>不绑定独立域名的情况下,可以在<code>http://{username}.github.io/{projectname}</code> 打开</li>
+<li>添加 CNAME文件,内容为你的域名(这里以我搭建的toko.wiki为例)</li>
+<li>添加 CNAME 域名解析<ul>
+<li>主机记录 @</li>
+<li>记录类型 CNAME</li>
+<li>记录值 username.github.io (我这里是7oko.github.io)</li>
+</ul>
+</li>
+<li>等待解析完成~</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-12T17:25:52+08:00"
-              content="2020-03-12">
-          03-12
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wiki/" rel="tag"># wiki</a>
+              <a href="/tags/mkdocs/" rel="tag"># mkdocs</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/12/MarkdownNotes/" itemprop="url">
-            <span itemprop="name">Markdown notes</span>
-          </a>
-      </h2>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/23/GitNotes/" rel="prev" title="Git学习笔记">
+      <i class="fa fa-chevron-left"></i> Git学习笔记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -283,6 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装MkDocs"><span class="nav-number">2.</span> <span class="nav-text">安装MkDocs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用MkDocs"><span class="nav-number">3.</span> <span class="nav-text">使用MkDocs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#托管到Github"><span class="nav-number">4.</span> <span class="nav-text">托管到Github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定独立域名"><span class="nav-number">5.</span> <span class="nav-text">绑定独立域名</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

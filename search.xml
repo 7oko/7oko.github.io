@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>基于mkdocs搭建自己的wiki平台</title>
+    <url>/2020/10/19/MkdocsWiki/</url>
+    <content><![CDATA[<p>前几天在浏览 <a href="https://wiki.geekplux.com/" target="_blank" rel="noopener">GeekPlux’s Wiki</a> 时, 很羡慕博主在掌握那么多种知识的同时还能有条理地梳理出来, 于是开始动工搭建自己的知识化wiki.</p>
+<a id="more"></a>
+
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>GitHub 账号</li>
+<li>Python 2.6及以上</li>
+<li>Python package manager <a href="http://pip.readthedocs.org/en/latest/installing.html" target="_blank" rel="noopener">pip</a> </li>
+<li>独立域名(可选)</li>
+</ul>
+<h1 id="安装MkDocs"><a href="#安装MkDocs" class="headerlink" title="安装MkDocs"></a>安装MkDocs</h1><ul>
+<li><p>使用pip安装mkdocs <code>pip install mkdocs</code> </p>
+<p><strong>这里我选用的是material for MkDocs <code>pip install mkdocs-material</code></strong></p>
+</li>
+<li><p>运行<code>mkdocs help</code> 检查是否正确安装</p>
+</li>
+</ul>
+<h1 id="使用MkDocs"><a href="#使用MkDocs" class="headerlink" title="使用MkDocs"></a>使用MkDocs</h1><ul>
+<li><p>初始化新项目</p>
+<p> <code>mkdocs new mywiki</code></p>
+<p><code>cd mywiki</code></p>
+</li>
+<li><p>预览当前文档</p>
+<p><code>mkdocs serve</code></p>
+</li>
+<li><p>在浏览器中打开 http:<em>//127.0.0.1:8000/</em></p>
+<p>(预览文档的内建服务器支持在配置文件,文档目录或主题发生改变时自动载入并重新生成文档.)</p>
+</li>
+<li><p>配置MkDocs</p>
+<p> 修改<code>mkdocs.yml</code>文件,详细配置可以查看<a href="https://www.mkdocs.org/" target="_blank" rel="noopener">MkDocs官网</a>  <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs官网</a></p>
+</li>
+</ul>
+<h1 id="托管到Github"><a href="#托管到Github" class="headerlink" title="托管到Github"></a>托管到Github</h1><ul>
+<li>将<code>Mkdocs build</code> 后生成的<code>site</code>文件夹所有内容push到新建的repo</li>
+</ul>
+<h1 id="绑定独立域名"><a href="#绑定独立域名" class="headerlink" title="绑定独立域名"></a>绑定独立域名</h1><ul>
+<li>不绑定独立域名的情况下,可以在<code>http://{username}.github.io/{projectname}</code> 打开</li>
+<li>添加 CNAME文件,内容为你的域名(这里以我搭建的toko.wiki为例)</li>
+<li>添加 CNAME 域名解析<ul>
+<li>主机记录 @</li>
+<li>记录类型 CNAME</li>
+<li>记录值 username.github.io (我这里是7oko.github.io)</li>
+</ul>
+</li>
+<li>等待解析完成~</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Work</category>
+        <category>wiki</category>
+      </categories>
+      <tags>
+        <tag>wiki</tag>
+        <tag>mkdocs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git学习笔记</title>
     <url>/2020/04/23/GitNotes/</url>
     <content><![CDATA[<blockquote>
