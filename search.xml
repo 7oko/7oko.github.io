@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>一加8的Android 11 折腾指南</title>
+    <url>/2020/10/28/Oneplus8-Android11-MagiskEdxposed/</url>
+    <content><![CDATA[<p>记录下手里一加8愉快的折腾之旅~</p>
+<a id="more"></a>
+
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li><p>解锁Bootloader且打开USB调试的一加8</p>
+</li>
+<li><p>氢OS Android11 Rom包</p>
+</li>
+<li><p>Payload Dumber </p>
+</li>
+<li><p>platform-tools</p>
+<p>打包下载： pan.baidu.com/s/1afSr1snXan4LoBLX9l0Urg 【pcge】</p>
+</li>
+</ul>
+<h1 id="刷入Magisk"><a href="#刷入Magisk" class="headerlink" title="刷入Magisk"></a>刷入Magisk</h1><h2 id="制作magisk-patched-img"><a href="#制作magisk-patched-img" class="headerlink" title="制作magisk_patched.img"></a>制作magisk_patched.img</h2><ul>
+<li><p>将官方包内的<code>payload.bin</code> 解压并放入Payload Dumber 的payload_input目录</p>
+</li>
+<li><p>打开<code>payload_dumper.exe</code>（看到boot解压出来就可以关闭了）</p>
+</li>
+<li><p>打开payload_output目录，将解压出的<code>boot.img</code>复制到手机根目录</p>
+</li>
+<li><p>下载并安装Magisk最新版本 (<a href="https://github.com/topjohnwu/Magisk/releases" target="_blank" rel="noopener">https://github.com/topjohnwu/Magisk/releases</a>)</p>
+<p>选择安装Magisk-选择并修补一个文件，选中放在根目录的<code>boot.img</code> ，等待修补完成</p>
+</li>
+<li><p>将手机download目录下的修补完成的<code>magisk_patched.img</code>复制到电脑</p>
+</li>
+</ul>
+<h2 id="工具刷入mgisk-patched-img"><a href="#工具刷入mgisk-patched-img" class="headerlink" title="工具刷入mgisk_patched.img"></a>工具刷入mgisk_patched.img</h2><ul>
+<li>将<code>mgisk_patched.img</code>放入 platform-tools 目录下</li>
+<li>运行 <code>打开CMD命令行.bat</code><ul>
+<li><code>adb reboot bootloader</code></li>
+<li><code>fastboot flash boot_a magisk_patched.img</code></li>
+<li><code>fastboot flash boot_b magisk_patched.img</code></li>
+<li><code>fastboot reboot</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="刷入EdXposed"><a href="#刷入EdXposed" class="headerlink" title="刷入EdXposed"></a>刷入EdXposed</h1><ul>
+<li>刷入<code>Riru - Core</code>模块</li>
+<li>刷入<code>Riru - EdXposed(YAHFA)</code> 或<code>Riru - EdXposed(SandHook)</code>模块</li>
+<li>安装最新的<code>Edxposed Manager</code> </li>
+</ul>
+<h1 id="总结与注意事项"><a href="#总结与注意事项" class="headerlink" title="总结与注意事项"></a>总结与注意事项</h1><ul>
+<li>制作<code>mgisk_patched.img</code>时要用最新的 v8.0.x版本，不能使用以往的v21.0版本</li>
+<li>刷写<code>mgisk_patched.img</code>时 a/b分区都要</li>
+<li>如果因刷入不兼容的模块导致无法开机，可以尝试<strong>卸载全部magisk模块</strong><ul>
+<li><code>adb shell</code></li>
+<li><code>magisk --remove-modules</code></li>
+<li><code>adb reboot</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="op8info.jpg" alt="op8info"></p>
+<p><img src="op8magisk1.jpg" alt="op8magisk1"></p>
+<p><img src="op8magisk2.jpg" alt="op8magisk2"></p>
+<p><img src="op8edxposed.jpg" alt="op8edxposed"></p>
+]]></content>
+      <categories>
+        <category>Life</category>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Magisk</tag>
+        <tag>Edxposed</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于mkdocs搭建自己的wiki平台</title>
     <url>/2020/10/19/MkdocsWiki/</url>
     <content><![CDATA[<p>前几天在浏览 <a href="https://wiki.geekplux.com/" target="_blank" rel="noopener">GeekPlux’s Wiki</a> 时, 很羡慕博主在掌握那么多种知识的同时还能有条理地梳理出来, 于是开始动工搭建自己的知识化wiki.</p>
